@@ -6,10 +6,18 @@ def listar_manifestacoes():
     else:
         print("Manifestações cadastradas:")
         for manifestacao in range(len(manifestacoes)):
-            print(f"{manifestacao+1}. {manifestacoes[manifestacao]}")#imprime a lista de manifestações
+            print(f"{manifestacao+1}:") #imprime o número da manifestação
+            for chave, valor in manifestacoes[manifestacao].items():
+                 print(f"{chave.capitalize()}: {valor}") #imprime a chave e o valor da manifestação
+            print()
+            # print(f"{manifestacao+1}. {manifestacoes[manifestacao]}")#imprime a lista de manifestações
 
 def criar_manifestacao_por_tipo():
-    tipo = input("Digite o tipo da manifestação (reclamação, sugestão, elogio, denúncia): ").strip().lower() #remove espaços em branco e converte para minúsculas
+    tipos = ("reclamação", "sugestão", "elogio", "denúncia") #tupla com os tipos de manifestações
+    tipo = "" #variável para armazenar o tipo da manifestação
+    while tipo not in tipos: #loop para garantir que o tipo informado seja válido
+        print("Tipo inválido. Digite novamente.")
+        tipo = input("Digite o tipo da manifestação (reclamação, sugestão, elogio, denúncia): ").strip().lower() #remove espaços em branco e converte para minúsculas
     mensagem = input("Digite a mensagem da manifestação: ").strip() #remove espaços em branco
     
     manifestacao = {
