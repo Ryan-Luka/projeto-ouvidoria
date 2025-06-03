@@ -10,7 +10,6 @@ def listar_manifestacoes():
             for chave, valor in manifestacoes[manifestacao].items():
                  print(f"{chave.capitalize()}: {valor}") #imprime a chave e o valor da manifestação
             print()
-            # print(f"{manifestacao+1}. {manifestacoes[manifestacao]}")#imprime a lista de manifestações
 
 def criar_manifestacao_por_tipo():
     while True: #loop para garantir que o tipo da manifestação seja válido
@@ -22,6 +21,14 @@ Escolha o tipo da manifestação:
 4. denúncia
 Opcão: """)) #solicita o tipo da manifestação
         if tipo in (1, 2, 3, 4): #verifica se o tipo da manifestação é válido
+            if tipo == 1:
+                tipo = "Reclamação"
+            elif tipo == 2:
+                tipo = "Sugestão"
+            elif tipo == 3:
+                tipo = "Elogio"
+            elif tipo == 4:
+                tipo = "Denúncia"
             mensagem = input("Digite a mensagem da manifestação: ").strip() #remove espaços em branco
             break #sai do loop se o tipo for válido
         else:
