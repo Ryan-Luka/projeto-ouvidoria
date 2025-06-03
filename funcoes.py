@@ -44,7 +44,21 @@ def listar_manifestacoes_por_tipo():
     if len(manifestacoes) == 0: #verifica se a lista está vazia
         print("Nenhuma manifestação cadastrada.")
     else:
-        tipo = input("Digite o tipo da manifestação (reclamação, sugestão, elogio, denúncia): ").strip().lower() #remove espaços em branco e converte para minúsculas
+        tipo = int(input("""
+Escolha o tipo da manifestação:
+1. Reclamação
+2. Sugestão
+3. Elogio
+4. denúncia
+Opcão: """)) #solicita o tipo da manifestação
+        if tipo == 1:
+                tipo = "Reclamação"
+        elif tipo == 2:
+            tipo = "Sugestão"
+        elif tipo == 3:
+            tipo = "Elogio"
+        elif tipo == 4:
+            tipo = "Denúncia"
         print(f"Manifestações do tipo '{tipo}':")
         for manifestacao in manifestacoes:
             if manifestacao['tipo'] == tipo: #verifica se o tipo da manifestação é igual ao tipo informado
