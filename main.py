@@ -19,12 +19,12 @@ while True:
 7. Sair do sistema
 """)
     opcao = int(input("Escolha uma opção: "))
+    print() #imprime uma linha em branco para melhor visualização
     if opcao == 1:
         listar_manifestacoes(conexao)
 
     elif opcao == 2:
-        print("manifestacoes por tipo")
-
+        listar_manifestacoes_por_tipo(conexao)
     elif opcao == 3:
         criar_manifestacao(conexao)
         
