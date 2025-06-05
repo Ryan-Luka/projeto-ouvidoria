@@ -102,10 +102,7 @@ def excluir_manifestacao(conexao):
 def exibir_quantidade_manifestacoes(conexao):
     consulta = "select count(*) from manifestacoes"
     quantidade = listarBancoDados(conexao, consulta)
-    if len(quantidade) == 0:
-        print("Nenhuma manifestação cadastrada.")
-    else:
-        print(f"Quantidade de manifestações cadastradas: {quantidade[0][0]}")
+    print(f"Quantidade de manifestações cadastradas: {quantidade[0][0]}")
     
 
 
