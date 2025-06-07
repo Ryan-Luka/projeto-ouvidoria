@@ -1,4 +1,5 @@
 from operacoesbd import *
+import os
 
 def listar_manifestacoes(conexao):
     consulta = "select * from manifestacoes"
@@ -6,6 +7,7 @@ def listar_manifestacoes(conexao):
     if len(manifestacoes) == 0: #verifica se a lista está vazia
         print("Nenhuma manifestação cadastrada.")
     else:
+        print("Lista de Manifestações: \n")
         for manifestacao in manifestacoes:
             print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
 
@@ -15,26 +17,32 @@ def listar_manifestacoes_por_tipo(conexao):
 1. Reclamação
 2. Sugestão
 3. Elogio
+4. Denúncia
 Opcão: """)) #solicita o tipo da manifestação
-        print() #imprime uma linha em branco para melhor visualização
-        if tipo in (1, 2, 3): #verifica se o tipo da manifestação é válido
+        os.system('cls' if os.name == 'nt' else 'clear') #limpa a tela do terminal
+        if tipo in (1, 2, 3, 4): #verifica se o tipo da manifestação é válido
             if tipo == 1:
                 tipo = "Reclamação"
             elif tipo == 2:
                 tipo = "Sugestão"
             elif tipo == 3:
                 tipo = "Elogio"
+            elif tipo == 4:
+                tipo = "Denúncia"
+            
             consulta = "select * from manifestacoes where tipo = %s"
             dados = [tipo] #cria uma lista com o tipo da manifestação
             manifestacoes = listarBancoDados(conexao, consulta, dados) #chama a função listarBancoDados do arquivo operacoesbd.py
+            
             if len(manifestacoes) == 0: #verifica se a lista está vazia
                 print(f"Nenhuma manifestação do tipo {tipo} cadastrada.")
             else:
+                print(f"Lista de Manifestações do tipo {tipo}: \n")
                 for manifestacao in manifestacoes:
                     print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
             break #sai do loop se o tipo for válido
         else:
-            print("Tipo inválido. Digite novamente.")
+            print("Tipo inválido. Digite novamente... \n")
 
 def criar_manifestacao(conexao):
     titulo = input("Digite o título da manifestação: ").strip() #remove espaços em branco
