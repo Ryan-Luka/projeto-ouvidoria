@@ -40,5 +40,5 @@ O sistema oferece um menu com as seguintes opções:
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/ouvidoria-python.git
-   cd ouvidoria-python
+   git clone https://github.com/Ryan-Luka/projeto-ouvidoria.git
+   cd projeto-ouvidoria
