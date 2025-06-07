@@ -3,33 +3,44 @@
 #KLISMA MATEUS CORDEIRO BARROS
 #MATHEUS SANTOS DANTAS CAVALCANTI
 
-from funcoes import * #importa todas as funções do arquivo funcoes.py
-#manifestacoes = []
+from operacoesbd import * #importa todas as funções do arquivo operacoesbd.py
+from funcoes_sql import * #importa todas as funções do arquivo funcoes_sql.py
+import os
+
+conexao = criarConexao('localhost', 'root', '123456', 'ouvidoria')
 
 while True:
+    os.system('cls' if os.name == 'nt' else 'clear') #limpa a tela do terminal
     print("""
-1. Listagem das manifestações
-2. Listagem de manifestações por tipo
-3. Criar uma nova manifestação
-4. Pesquisar uma manifestação por código
-5. Excluir uma manifestação por código
-6. Exibir quantidade de manifestações
+1. Listagem das Manifestações
+2. Listagem de Manifestações por Tipo
+3. Criar uma nova Manifestação
+4. Exibir quantidade de Manifestações
+5. Pesquisar uma Manifestação por código
+6. Excluir uma Manifestação por código
 7. Sair do sistema
 """)
     opcao = int(input("Escolha uma opção: "))
+    #print() #imprime uma linha em branco para melhor visualização
+    os.system('cls' if os.name == 'nt' else 'clear') #limpa a tela do terminal
     if opcao == 1:
-        listar_manifestacoes() #chama a função listar_manifestacoes do arquivo funcoes.py
+        listar_manifestacoes(conexao)
+
     elif opcao == 2:
-        listar_manifestacoes_por_tipo() #chama a função listar_manifestacoes_por_tipo do arquivo funcoes.py 
+        listar_manifestacoes_por_tipo(conexao)
+        
     elif opcao == 3:
-        #criar_manifestacao() #chama a função criar_manifestacao do arquivo funcoes.py
-        criar_manifestacao_por_tipo()
+        criar_manifestacao(conexao)
+        
     elif opcao == 4:
-        pesquisar_manifestacao() #chama a função buscar_manifestacao do arquivo funcoes.py
+        exibir_quantidade_manifestacoes(conexao)
+    
     elif opcao == 5:
-        excluir_manifestacao() #chama a função excluir_manifestacao do arquivo funcoes.py
+        pesquisar_manifestacao(conexao)
+    
     elif opcao == 6:
-        quantidade_manifestacoes() #chama a função quantidade_manifestacoes do arquivo funcoes.py
+        excluir_manifestacao(conexao)
+
     elif opcao == 7:
         print("Saindo...")
         print("Programa encerrado.") #sai do loop e encerra o programa
@@ -38,3 +49,5 @@ while True:
         print("Opção inválida. Digite novamente.") #imprime mensagem de erro se a opção for inválida
     
     input("\nPressione Enter para continuar...") #aguarda o usuário pressionar Enter para continuar
+
+encerrarConexao(conexao) #encerra a conexão com o banco de dados
