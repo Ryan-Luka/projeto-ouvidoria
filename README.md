@@ -1,6 +1,6 @@
 # 📣 Sistema de Ouvidoria - Projeto em Python
 
-Este projeto é um sistema de ouvidoria desenvolvido por alunos do curso de Sistemas de Informação da UniFacisa, a pedido da Universidade XYZ. O sistema permite o gerenciamento de manifestações feitas por usuários (reclamações, sugestões e elogios).
+Este projeto é um sistema de ouvidoria desenvolvido por alunos do curso de Sistemas de Informação da UniFacisa, a pedido da Universidade XYZ. O sistema permite o gerenciamento de manifestações feitas por usuários (reclamações, sugestões, elogios e denúncias).
 
 ## 📝 Descrição
 
