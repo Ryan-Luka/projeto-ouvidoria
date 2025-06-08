@@ -1,7 +1,7 @@
 from operacoesbd import *
 import os
 
-def listar_manifestacoes(conexao):
+def listar_manifestacoes(conexao): #lista todas as manifestações cadastradas
     consulta = "select * from manifestacoes"
     manifestacoes = listarBancoDados(conexao, consulta)
     if len(manifestacoes) == 0: #verifica se a lista está vazia
@@ -44,34 +44,47 @@ Opcão: """)) #solicita o tipo da manifestação
         else:
             print("Tipo inválido. Digite novamente... \n")
 
-def criar_manifestacao(conexao):
+def criar_manifestacao(conexao): #cria uma nova manifestação
     titulo = input("Digite o título da manifestação: ").strip() #remove espaços em branco
     nome = input("Digite o seu nome: ").strip() #remove espaços em branco
     while True: #loop para garantir que o tipo da manifestação seja válido
-            tipo = int(input("""
+        tipo = int(input("""
 Escolha o tipo da manifestação:
 1. Reclamação
 2. Sugestão
 3. Elogio
 4. denúncia
 Opcão: """)) #solicita o tipo da manifestação
-            print() #imprime uma linha em branco para melhor visualização
-            if tipo in (1, 2, 3, 4): #verifica se o tipo da manifestação é válido
-                if tipo == 1:
-                    tipo = "Reclamação"
-                elif tipo == 2:
-                    tipo = "Sugestão"
-                elif tipo == 3:
-                    tipo = "Elogio"
-                elif tipo == 4:
-                    tipo = "Denúncia"
-                descricao = input("Digite a mensagem da manifestação: ").strip() #remove espaços em branco
-                break #sai do loop se o tipo for válido
-            else:
-                print("Tipo inválido. Digite novamente.")
+        if tipo in (1, 2, 3, 4): #verifica se o tipo da manifestação é válido
+            if tipo == 1:
+                tipo = "Reclamação"
+            elif tipo == 2:
+                tipo = "Sugestão"
+            elif tipo == 3:
+                tipo = "Elogio"
+            elif tipo == 4:
+                tipo = "Denúncia"
+            break #sai do loop se o tipo for válido
+        else:
+            print("\nTipo inválido. Digite novamente.")
+
+    while True: #loop para garantir que a descrição da manifestação seja válida
+        descricao = input("\nDigite a mensagem da manifestação: ").strip() #remove espaços em branco
+        if len(descricao) <= 3: #verifica se a descrição é maior que 3 caracteres
+            print("\nA descrição deve ter mais de 3 caracteres. Digite novamente.\n")
+            input("\nPressione Enter para continuar...") #aguarda o usuário pressionar Enter para continuar
+        else:
+            break #sai do loop se a descrição for válida
+
     consulta = "insert into manifestacoes (titulo, tipo, autor, descricao) values (%s, %s, %s, %s)" #consulta para inserir os dados da manifestação
     dados = (titulo, tipo, nome, descricao) #cria uma tupla com os dados da manifestação
     insertNoBancoDados(conexao, consulta, dados) #chama a função insertNoBancoDados do arquivo operacoesbd.py
+    print("\nManifestação cadastrada com sucesso!") #imprime mensagem de sucesso
+
+def exibir_quantidade_manifestacoes(conexao): #exibe a quantidade de manifestações cadastradas
+    consulta = "select count(*) from manifestacoes"
+    quantidade = listarBancoDados(conexao, consulta)
+    print(f"Quantidade de manifestações cadastradas: {quantidade[0][0]}")
 
 def pesquisar_manifestacao(conexao):
     consulta = "select * from manifestacoes"
@@ -107,10 +120,6 @@ def excluir_manifestacao(conexao):
         else:
             print(f"Manifestação com código {codigo} excluída com sucesso.")
 
-def exibir_quantidade_manifestacoes(conexao):
-    consulta = "select count(*) from manifestacoes"
-    quantidade = listarBancoDados(conexao, consulta)
-    print(f"Quantidade de manifestações cadastradas: {quantidade[0][0]}")
     
 
 
