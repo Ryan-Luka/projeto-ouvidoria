@@ -12,7 +12,6 @@ def listar_manifestacoes(conexao): #lista todas as manifestações cadastradas
         for manifestacao in manifestacoes:
             print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
 
-
 def listar_manifestacoes_por_tipo(conexao):
     tipos_manifestacao = {
         1: "Reclamação",
@@ -47,9 +46,6 @@ def listar_manifestacoes_por_tipo(conexao):
         print(f"Lista de Manifestações do tipo {tipo_escolhido}: \n")
         for manifestacao in manifestacoes:
             print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
-    
-
-
 
 def criar_manifestacao(conexao): #cria uma nova manifestação
     titulo = input("Digite o título da manifestação: ").strip() #remove espaços em branco
