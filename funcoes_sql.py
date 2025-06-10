@@ -4,6 +4,7 @@ import os
 def listar_manifestacoes(conexao): #lista todas as manifestações cadastradas
     consulta = "select * from manifestacoes"
     manifestacoes = listarBancoDados(conexao, consulta)
+    
     if len(manifestacoes) == 0: #verifica se a lista está vazia
         print("Nenhuma manifestação cadastrada.")
     else:
@@ -53,12 +54,14 @@ def listar_manifestacoes_por_tipo(conexao):
 def criar_manifestacao(conexao): #cria uma nova manifestação
     titulo = input("Digite o título da manifestação: ").strip() #remove espaços em branco
     nome = input("Digite o seu nome: ").strip() #remove espaços em branco
+    
     tipos_manifestacao = {
         1: "Reclamação",
         2: "Sugestão",
         3: "Elogio",
         4: "Denúncia"
     }
+    
     while True: #loop para garantir que o tipo da manifestação seja válido
         try:
             print("Escolha o tipo da manifestação:")

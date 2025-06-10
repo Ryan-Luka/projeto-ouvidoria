@@ -47,13 +47,14 @@ while True:
             print("Saindo...")
             print("Programa encerrado.") #sai do loop e encerra o programa
             break
+        
         else:
             print("Opção inválida. Digite novamente.") #imprime mensagem de erro se a opção for inválida
         
         input("\nPressione Enter para continuar...") #aguarda o usuário pressionar Enter para continuar
+
     except ValueError:
         print("\nEntrada inválida. Digite um número válido.\n")
         input("\nPressione Enter para continuar...") #aguarda o usuário pressionar Enter para continuar
-
 
 encerrarConexao(conexao) #encerra a conexão com o banco de dados
