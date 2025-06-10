@@ -47,7 +47,7 @@ def listar_manifestacoes_por_tipo(conexao):
         manifestacoes = listarBancoDados(conexao, consulta, dados) #chama a função listarBancoDados do arquivo operacoesbd.py
                 
         if len(manifestacoes) == 0: #verifica se a lista está vazia
-                    print(f"Nenhuma manifestação do tipo {tipo_escolhido} cadastrada.")
+            print(f"Nenhuma manifestação do tipo {tipo_escolhido} cadastrada.")
         else:
             print(f"Lista de Manifestações do tipo {tipo_escolhido}: \n")
             for manifestacao in manifestacoes:
