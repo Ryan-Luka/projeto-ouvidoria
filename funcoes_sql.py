@@ -20,32 +20,38 @@ def listar_manifestacoes_por_tipo(conexao):
         4: "Denúncia"
     }
     
-    while True:
-        try:
-            print("Escolha o tipo da manifestação:")
-            for chave, valor in tipos_manifestacao.items():
-                print(f"{chave}. {valor}")
-            opcao = int(input("Opção: "))
-            if opcao in tipos_manifestacao:
-                tipo_escolhido = tipos_manifestacao[opcao]
-                break
-            else:
-                print("\nTipo inválido. Digite novamente... \n")
-        except ValueError:
-            print("\nEntrada inválida. Digite um número válido.\n")
-
-    os.system('cls' if os.name == 'nt' else 'clear') #limpa a tela do terminal
-
-    consulta = "select * from manifestacoes where tipo = %s"
-    dados = [tipo_escolhido]
-    manifestacoes = listarBancoDados(conexao, consulta, dados) #chama a função listarBancoDados do arquivo operacoesbd.py
-            
+    consulta = "select * from manifestacoes"
+    manifestacoes = listarBancoDados(conexao, consulta)
+    
     if len(manifestacoes) == 0: #verifica se a lista está vazia
-                print(f"Nenhuma manifestação do tipo {tipo_escolhido} cadastrada.")
+        print("Nenhuma manifestação cadastrada.")
     else:
-        print(f"Lista de Manifestações do tipo {tipo_escolhido}: \n")
-        for manifestacao in manifestacoes:
-            print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
+        while True:
+            try:
+                print("Escolha o tipo da manifestação:")
+                for chave, valor in tipos_manifestacao.items():
+                    print(f"{chave}. {valor}")
+                opcao = int(input("Opção: "))
+                if opcao in tipos_manifestacao:
+                    tipo_escolhido = tipos_manifestacao[opcao]
+                    break
+                else:
+                    print("\nTipo inválido. Digite novamente... \n")
+            except ValueError:
+                print("\nEntrada inválida. Digite um número válido.\n")
+
+        os.system('cls' if os.name == 'nt' else 'clear') #limpa a tela do terminal
+
+        consulta = "select * from manifestacoes where tipo = %s"
+        dados = [tipo_escolhido]
+        manifestacoes = listarBancoDados(conexao, consulta, dados) #chama a função listarBancoDados do arquivo operacoesbd.py
+                
+        if len(manifestacoes) == 0: #verifica se a lista está vazia
+                    print(f"Nenhuma manifestação do tipo {tipo_escolhido} cadastrada.")
+        else:
+            print(f"Lista de Manifestações do tipo {tipo_escolhido}: \n")
+            for manifestacao in manifestacoes:
+                print(f"Código: {manifestacao[0]}\nTítulo: {manifestacao[1]}\nTipo: {manifestacao[2]}\nAutor: {manifestacao[3]}\nDescrição: {manifestacao[4]}\n")
 
 def criar_manifestacao(conexao): #cria uma nova manifestação
     titulo = input("Digite o título da manifestação: ").strip() #remove espaços em branco
