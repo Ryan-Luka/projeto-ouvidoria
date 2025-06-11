@@ -20,10 +20,9 @@ def listar_manifestacoes_por_tipo(conexao):
         4: "Denúncia"
     }
     
-    consulta = "select * from manifestacoes"
-    manifestacoes = listarBancoDados(conexao, consulta)
-    
-    if len(manifestacoes) == 0: #verifica se a lista está vazia
+    consulta = "select count(*) from manifestacoes"
+    quantidade = listarBancoDados(conexao, consulta)[0][0]
+    if quantidade == 0:
         print("Nenhuma manifestação cadastrada.")
     else:
         while True:
@@ -92,14 +91,16 @@ def criar_manifestacao(conexao): #cria uma nova manifestação
 
 def exibir_quantidade_manifestacoes(conexao): #exibe a quantidade de manifestações cadastradas
     consulta = "select count(*) from manifestacoes"
-    quantidade = listarBancoDados(conexao, consulta)
-    print(f"Quantidade de manifestações cadastradas: {quantidade[0][0]}")
+    quantidade = listarBancoDados(conexao, consulta)[0][0]
+    if quantidade == 0:
+        print("Nenhuma manifestação cadastrada.")
+    else:
+        print(f"Quantidade de manifestações cadastradas: {quantidade}")
 
 def pesquisar_manifestacao(conexao):
-    consulta = "select * from manifestacoes"
-    manifestacoes = listarBancoDados(conexao, consulta) #chama a função listarBancoDados do arquivo operacoesbd.py
-
-    if len(manifestacoes) == 0: #verifica se a lista está vazia
+    consulta = "select count(*) from manifestacoes"
+    quantidade = listarBancoDados(conexao, consulta)[0][0]
+    if quantidade == 0:
         print("Nenhuma manifestação cadastrada.")
     else:
         while True:
@@ -119,10 +120,9 @@ def pesquisar_manifestacao(conexao):
                 print("\nEntrada inválida. Digite um número válido.\n")
     
 def excluir_manifestacao(conexao):
-    consulta = "select * from manifestacoes"
-    manifestacoes = listarBancoDados(conexao, consulta)
-
-    if len(manifestacoes) == 0: #verifica se a lista está vazia
+    consulta = "select count(*) from manifestacoes"
+    quantidade = listarBancoDados(conexao, consulta)[0][0]
+    if quantidade == 0:
         print("Nenhuma manifestação cadastrada.")
     else:
         while True:
